@@ -1,8 +1,9 @@
 package com.epicode.catalogo;
 
 public class Libro extends ElementoCatalogo {
-    private String autore;
-    private String genere;
+    private final String autore;
+    private final String genere;
+
 
     public Libro(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
         super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
@@ -20,6 +21,13 @@ public class Libro extends ElementoCatalogo {
 
     @Override
     public String toString() {
-        return super.toString() + ", Autore: " + autore + ", Genere: " + genere;
+        return "Libro{" +
+                "ISBN='" + getCodiceISBN() + '\'' +
+                ", Titolo='" + getTitolo() + '\'' +
+                ", Anno=" + getAnnoPubblicazione() +
+                ", Numero Pagine=" + getNumeroPagine() +
+                ", Autore='" + getAutore() + '\'' +
+                ", Genere='" + getGenere() + '\'' +  // Usa il metodo qui
+                '}';
     }
 }

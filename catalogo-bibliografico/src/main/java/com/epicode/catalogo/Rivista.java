@@ -7,7 +7,7 @@ public class Rivista extends ElementoCatalogo {
         SEMESTRALE
     }
 
-    private Periodicita periodicita;
+    private final Periodicita periodicita;
 
     public Rivista(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, Periodicita periodicita) {
         super(codiceISBN, titolo, annoPubblicazione, numeroPagine);

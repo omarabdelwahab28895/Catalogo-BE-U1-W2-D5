@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 
 public class Archivio {
 
-    private List<ElementoCatalogo> catalogo;
+    private final List<ElementoCatalogo> catalogo;
+
 
     public Archivio() {
         this.catalogo = new ArrayList<>();
@@ -16,11 +17,16 @@ public class Archivio {
 
     // Aggiunta di un elemento al catalogo
     public void aggiungiElemento(ElementoCatalogo elemento) {
+        // Controlla se l'elemento con lo stesso ISBN esiste già
         if (catalogo.stream().anyMatch(e -> e.getCodiceISBN().equals(elemento.getCodiceISBN()))) {
-            throw new IllegalArgumentException("Elemento con lo stesso ISBN già presente!");
+            System.out.println("Errore: ISBN duplicato. Non è possibile aggiungere l'elemento con ISBN " + elemento.getCodiceISBN());
+            return; // Esci senza aggiungere l'elemento
         }
+        // Aggiungi l'elemento al catalogo
         catalogo.add(elemento);
+        System.out.println("Elemento aggiunto con successo: " + elemento.getTitolo());
     }
+
 
     // Ricerca per ISBN con eccezione custom
     public ElementoCatalogo ricercaPerISBN(String isbn) {
@@ -29,6 +35,7 @@ public class Archivio {
                 .findFirst()
                 .orElseThrow(() -> new ElementoNonTrovatoException("Elemento con ISBN " + isbn + " non trovato."));
     }
+
 
     // Rimozione di un elemento dal catalogo dato il codice ISBN
     public void rimuoviElemento(String isbn) {
@@ -67,16 +74,15 @@ public class Archivio {
         Optional<ElementoCatalogo> elementoConPiuPagine = catalogo.stream()
                 .max(Comparator.comparingInt(ElementoCatalogo::getNumeroPagine));
         double mediaPagine = catalogo.stream()
-                .mapToInt(ElementoCatalogo::getNumeroPagine)
-                .average()
-                .orElse(0.0);
+                .mapToInt(ElementoCatalogo::getNumeroPagine).average().orElse(0.0);
 
         System.out.println("Statistiche del catalogo:");
         System.out.println("Totale libri: " + totaleLibri);
         System.out.println("Totale riviste: " + totaleRiviste);
         elementoConPiuPagine.ifPresent(e ->
-                System.out.println("Elemento con il maggior numero di pagine: " + e.getTitolo() + " (" + e.getNumeroPagine() + " pagine)")
+                System.out.println("Elemento con più pagine: " + e.getTitolo() + " (" + e.getNumeroPagine() + " pagine)")
         );
-        System.out.println("Media numero di pagine: " + mediaPagine);
+        System.out.println("Media pagine: " + mediaPagine);
     }
+
 }
