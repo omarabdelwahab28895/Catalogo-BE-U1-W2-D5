@@ -1,10 +1,10 @@
 package com.epicode.catalogo;
 
 public abstract class ElementoCatalogo {
-    private final String codiceISBN; // Campo reso immutabile con 'final'
-    private final String titolo; // Campo reso immutabile con 'final'
-    private final int annoPubblicazione; // Campo reso immutabile con 'final'
-    private final int numeroPagine; // Campo reso immutabile con 'final'
+    private final String codiceISBN;
+    private final String titolo;
+    private final int annoPubblicazione;
+    private final int numeroPagine;
 
     // Costruttore per inizializzare tutti i campi
     public ElementoCatalogo(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine) {
@@ -14,7 +14,7 @@ public abstract class ElementoCatalogo {
         this.numeroPagine = numeroPagine;
     }
 
-    // Metodi getter per accedere ai campi
+
     public String getCodiceISBN() {
         return codiceISBN;
     }
@@ -31,7 +31,6 @@ public abstract class ElementoCatalogo {
         return numeroPagine;
     }
 
-    // Metodo toString per rappresentare i dati dell'elemento
     @Override
     public String toString() {
         return "ISBN: " + codiceISBN + ", Titolo: " + titolo +
